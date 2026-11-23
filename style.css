@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600&display=swap');
+
+:root {
+  --bg: #05060f;
+  --panel: rgba(12, 16, 40, 0.65);
+  --cyan: #00f0ff;
+  --pink: #ff2bd6;
+  --yellow: #ffe600;
+  --green: #39ff14;
+  --text: #e6f1ff;
+  --glow-cyan: 0 0 8px rgba(0,240,255,.8), 0 0 24px rgba(0,240,255,.4);
+  --glow-pink: 0 0 8px rgba(255,43,214,.8), 0 0 24px rgba(255,43,214,.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { min-height: 100%; }
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,43,214,.18), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(0,240,255,.18), transparent 40%),
+    var(--bg);
+  padding: env(safe-area-inset-top) 14px env(safe-area-inset-bottom);
+  overflow-x: hidden;
+}
+
+/* Lưới nền + hiệu ứng quét */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(rgba(0,240,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,.06) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle, #000 40%, transparent 100%);
+}
+body::after {
+  content: "";
+  position: fixed; left: 0; right: 0; height: 120px; top: -120px;
+  background: linear-gradient(transparent, rgba(0,240,255,.08), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none; z-index: 0;
+}
+@keyframes scan { to { top: 100%; } }
+
+/* Tiêu đề */
+h1, header h1, .title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  text-align: center;
+  font-size: clamp(1.3rem, 6vw, 2.2rem);
+  letter-spacing: 3px;
+  margin: 18px 0 6px;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  animation: flicker 5s infinite;
+}
+h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--pink);
+  text-shadow: var(--glow-pink);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+p.subtitle, .subtitle {
+  text-align: center; opacity: .75; letter-spacing: 2px; margin-bottom: 16px;
+}
+@keyframes flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: .6; } 95% { opacity: 1; } 97% { opacity: .7; }
+}
+
+/* Khung chính */
+.container, main, .app {
+  max-width: 720px; margin: 0 auto; position: relative; z-index: 1;
+}
+
+.panel, .card, section {
+  background: var(--panel);
+  border: 1px solid rgba(0,240,255,.35);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0,240,255,.12), inset 0 0 20px rgba(255,43,214,.05);
+}
+
+/* Video + canvas */
+.video-wrap, .camera, .camera-box {
+  position: relative;
+  border-radius: 16px; overflow: hidden;
+  border: 2px solid var(--cyan);
+  box-shadow: var(--glow-cyan);
+  background: #000;
+}
+video, canvas, #video, #canvas {
+  width: 100%; display: block; border-radius: 14px;
+}
+.video-wrap canvas, .camera canvas, #canvas {
+  position: absolute; inset: 0; height: 100%;
+}
+/* Góc HUD */
+.video-wrap::before, .camera::before, .camera-box::before {
+  content: "● REC  YAMA VISION AI";
+  position: absolute; top: 8px; left: 10px; z-index: 3;
+  font: 700 .7rem 'Orbitron', sans-serif;
+  color: var(--pink); text-shadow: var(--glow-pink);
+  animation: blink 1.2s infinite;
+}
+@keyframes blink { 50% { opacity: .35; } }
+
+/* Bộ đếm */
+.counter, .count, #count, #counter {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 18vw, 6rem);
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--yellow), 0 0 30px rgba(255,230,0,.5);
+  line-height: 1.1;
+}
+.label, .counter-label {
+  text-align: center; letter-spacing: 4px; opacity: .8; font-size: .85rem;
+}
+
+/* Lưới thống kê */
+.stats, .grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+}
+.stat, .stat-box {
+  text-align: center; padding: 12px;
+  border: 1px solid rgba(255,43,214,.4);
+  border-radius: 12px;
+  background: rgba(255,43,214,.06);
+}
+.stat span, .stat-box span {
+  display: block; font: 700 1.6rem 'Orbitron', sans-serif; color: var(--green);
+  text-shadow: 0 0 10px var(--green);
+}
+
+/* Nút bấm */
+button, .btn {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700; letter-spacing: 2px; font-size: .85rem;
+  color: var(--cyan);
+  background: transparent;
+  border: 2px solid var(--cyan);
+  border-radius: 12px;
+  padding: 14px 18px; min-height: 48px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: var(--glow-cyan), inset 0 0 12px rgba(0,240,255,.15);
+  transition: all .2s ease;
+}
+button:active, .btn:active {
+  transform: scale(.96);
+  background: var(--cyan); color: #000;
+}
+button.start, .btn-start { color: var(--green); border-color: var(--green); box-shadow: 0 0 10px var(--green); }
+button.stop,  .btn-stop  { color: var(--pink);  border-color: var(--pink);  box-shadow: var(--glow-pink); }
+button.reset, .btn-reset { color: var(--yellow); border-color: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+button:disabled { opacity: .4; box-shadow: none; }
+
+.controls, .buttons {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 12px 0;
+}
+.controls button, .buttons button { flex: 1 1 140px; }
+
+/* Input / select */
+input, select, textarea {
+  width: 100%; padding: 12px;
+  font: 600 1rem 'Rajdhani', sans-serif;
+  color: var(--text);
+  background: rgba(0,0,0,.4);
+  border: 1px solid var(--cyan);
+  border-radius: 10px; outline: none;
+}
+input:focus, select:focus { box-shadow: var(--glow-cyan); }
+input[type=range] { accent-color: var(--pink); padding: 0; }
+
+/* Trạng thái */
+.status, #status {
+  text-align: center; font-weight: 600; letter-spacing: 2px;
+  color: var(--green); text-shadow: 0 0 8px var(--green);
+}
+
+/* Log / bảng */
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th { color: var(--cyan); text-align: left; padding: 8px; border-bottom: 1px solid var(--cyan); font-family: 'Orbitron'; font-size: .75rem; }
+td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,.08); }
+
+footer {
+  text-align: center; opacity: .6; font-size: .8rem; letter-spacing: 2px; padding: 20px 0;
+}
+
+/* Thanh cuộn */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
+
+@media (min-width: 768px) {
+  .stats, .grid { grid-template-columns: repeat(4, 1fr); }
+}
