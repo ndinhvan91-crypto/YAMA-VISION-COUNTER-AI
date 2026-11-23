@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070914">
+  <title>YAMA Vision Counter AI VIP PRO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">YAMA<span> AI</span></div>
+  <div class="status" id="status">SYSTEM STANDBY</div>
+</header>
+
+<main class="container">
+
+  <section class="hero">
+    <p class="eyebrow">ARTIFICIAL INTELLIGENCE SYSTEM</p>
+    <h1>VISION <span>COUNTER</span></h1>
+    <p>Human Detection • Object Recognition • Smart Counting</p>
+  </section>
+
+  <section class="dashboard">
+    <article class="stat">
+      <span>PEOPLE</span>
+      <strong id="peopleCount">0</strong>
+      <small>Người được phát hiện</small>
+    </article>
+
+    <article class="stat">
+      <span>OBJECTS</span>
+      <strong id="objectCount">0</strong>
+      <small>Đồ vật được phát hiện</small>
+    </article>
+
+    <article class="stat">
+      <span>TOTAL</span>
+      <strong id="totalCount">0</strong>
+      <small>Tổng phát hiện</small>
+    </article>
+  </section>
+
+  <section class="scanner panel">
+    <div class="section-title">
+      <h2>AI SCANNER</h2>
+      <span id="aiStatus">WAITING</span>
+    </div>
+
+    <div class="camera-box">
+      <video id="video" autoplay muted playsinline hidden></video>
+      <img id="preview" alt="Ảnh phân tích" hidden>
+      <canvas id="canvas"></canvas>
+
+      <div id="placeholder" class="placeholder">
+        <div class="scan-icon">⌗</div>
+        <h3>YAMA VISION</h3>
+        <p>Camera hoặc tải ảnh để bắt đầu</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">BẬT CAMERA</button>
+      <button id="stopBtn">DỪNG CAMERA</button>
+      <button id="switchBtn">ĐỔI CAMERA</button>
+    </div>
+
+    <div class="controls">
+      <label for="imageInput" class="upload-btn">CHỌN ẢNH</label>
+      <input id="imageInput" type="file" accept="image/*" hidden>
+      <button id="clearBtn">XÓA</button>
+    </div>
+  </section>
+
+  <section class="panel settings">
+    <h2>AI SETTINGS</h2>
+
+    <label for="confidence">
+      Độ tin cậy: <strong id="confidenceValue">50%</strong>
+    </label>
+    <input id="confidence" type="range"
+      min="10" max="95" value="50" step="5">
+
+    <label class="toggle">
+      <span>Hiện khung nhận diện</span>
+      <input id="showBoxes" type="checkbox" checked>
+    </label>
+
+    <label class="toggle">
+      <span>Hiện tên đồ vật</span>
+      <input id="showLabels" type="checkbox" checked>
+    </label>
+  </section>
+
+  <section class="panel results">
+    <div class="section-title">
+      <h2>DETECTION RESULTS</h2>
+      <button id="exportBtn">EXPORT CSV</button>
+    </div>
+
+    <div id="resultsList">
+      <p class="empty">Chưa có dữ liệu nhận diện.</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>SYSTEM LOG</h2>
+    <div id="log">YAMA AI initialized.</div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>YAMA VISION COUNTER AI</strong>
+  <p>VIP PRO • VERSION 1.0</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
