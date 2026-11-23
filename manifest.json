@@ -1,0 +1,19 @@
+{
+  "name": "YAMA Vision Counter AI VIP PRO",
+  "short_name": "YAMA Vision",
+  "description": "Đếm người và đồ vật bằng AI - Cyberpunk Edition",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05060f",
+  "theme_color": "#00f0ff",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
